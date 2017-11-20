@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+releases_path="https://www.googleapis.com/storage/v1/b/dart-archive/o?prefix=channels/stable/release/&delimiter=/"
+releases_dev_path="https://www.googleapis.com/storage/v1/b/dart-archive/o?prefix=channels/dev/release/&delimiter=/"
+versions=$(curl -s $releases_path | awk -F'/' 'NF > 1 && /\./ {print $4}';curl -s $releases_dev_path | awk -F'/' 'NF > 1 && /\./ {print $4}')
+echo $versions | sort | uniq
